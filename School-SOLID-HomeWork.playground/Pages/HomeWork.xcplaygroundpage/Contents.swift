@@ -12,20 +12,11 @@ import PlaygroundSupport
 // - Добиться переиспользуемости экрана, используя паттерны проектирования.
 // - Должна быть возможность пробросить любой сервис и получить список из другой API;
 
-
-
-
-
-
-
-
-
-
 /// Настраиваем экран и его зависимости 
-let factory = UniversityTableViewModuleFactory()
+let factory = UniversityTableViewControllerFactory()
 let viewController = factory.make()
 
-viewController.view.frame = CGRect(x: 0, y: 0, width: 320, height: 568)
+viewController.view.frame = CGRect(x: 0, y: 0, width: 100, height: 568)
 
 ///// Playground
 

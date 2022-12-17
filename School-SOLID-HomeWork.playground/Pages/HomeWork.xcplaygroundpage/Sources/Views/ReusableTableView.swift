@@ -2,15 +2,17 @@ import UIKit
 
 public protocol DisplaysReusableTableView: UIView {
     func configure(tableViewDelegate: UITableViewDataSource & UITableViewDelegate)
+    func reloadTable()
 }
 
 public final class ReusableTableView: UIView {
     // MARK: - views
-    let tableView: UITableView
+    public let tableView: UITableView
     // MARK: - init
     public init(frame: CGRect = .zero, _ tableView: UITableView) {
         self.tableView = tableView
         super.init(frame: frame)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier())
         setupViews()
         setupConstraints()
     }
@@ -40,5 +42,8 @@ extension ReusableTableView: DisplaysReusableTableView {
     public func configure(tableViewDelegate: UITableViewDataSource & UITableViewDelegate) {
         tableView.delegate = tableViewDelegate
         tableView.dataSource = tableViewDelegate
+    }
+    public func reloadTable(){
+        tableView.reloadData()
     }
 }

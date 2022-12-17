@@ -2,23 +2,32 @@ import Foundation
 import UIKit
 
 public final class UniversityDataSource: DataSourcing {
-    public typealias Data = University
-    private var universities: [Data]?
 
-    public var tableRowsNumber: ((UITableView, Int) -> Int) = { tableView, section in
-        //        return universities.count
-        100
+    public var data: [University]?
+
+    public lazy var tableRowsNumber: ((UITableView, Int) -> Int) = { [weak self] tableView, section in
+        guard let self = self else { return 0 }
+        return self.data?.count ?? 0
     }
 
-    public var tableCell: (UITableView, IndexPath) -> UITableViewCell = { tableView ,indexPath in
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId") ?? UITableViewCell(style: .default, reuseIdentifier: "cellId")
+    public lazy var tableCell: (UITableView, IndexPath) -> UITableViewCell = { [weak self] tableView ,indexPath in
+        guard let self = self else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId") ?? UITableViewCell(style: .default, reuseIdentifier: "cellId")
 
-        //        cell.textLabel?.text = universities[indexPath.row].name
-        UITableViewCell()
+        cell.textLabel?.text = self.data?[indexPath.row].name ?? ""
+        return cell
 
     }
 
     public init() {}
+
+
+    public func setupData(_ data: [University]?) {
+        self.data = data
+    }
+
+
+
     
     
 }

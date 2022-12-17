@@ -5,6 +5,7 @@ public final class UniversityService: NetworkServicing {
 
     let jsonDecoder = JSONDecoder()
     let urlSession = URLSession.shared
+    public init() {}
 
     public func fetchData(_ completion: @escaping (Result<[Responce], Error>) -> Void) {
         let uri = "http://universities.hipolabs.com/search?country=United+States"
