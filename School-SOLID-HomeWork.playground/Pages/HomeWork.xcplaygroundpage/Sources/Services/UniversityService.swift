@@ -1,13 +1,15 @@
 import Foundation
 
 public final class UniversityService: NetworkServicing {
-    public typealias Responce = University
+    // MARK: - internal properties
+    private let jsonDecoder = JSONDecoder()
+    private let urlSession = URLSession.shared
 
-    let jsonDecoder = JSONDecoder()
-    let urlSession = URLSession.shared
+    // MARK: - init
     public init() {}
 
-    public func fetchData(_ completion: @escaping (Result<[Responce], Error>) -> Void) {
+    // MARK: - functions
+    public func fetchData(_ completion: @escaping (Result<[University], Error>) -> Void) {
         let uri = "http://universities.hipolabs.com/search?country=United+States"
 
         guard let url = URL(string: uri) else {
